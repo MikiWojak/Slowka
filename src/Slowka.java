@@ -207,7 +207,7 @@ public class Slowka {
 		return czySaSlowka;
 	}
 	
-	//uzyskanie s³ówka natywnego
+	//uzyskanie s³ówka natywnego do testu
 	public String getNatyw() {
 		try {
 			return natyw.get(wylosowane.get(index));
@@ -216,10 +216,28 @@ public class Slowka {
 		}
 	}
 	
-	//uzyskanie s³ówka obcego
+	//uzyskanie s³ówka natywnego do modyfikacji
+	public String getNatyw(int i) {
+		try {
+			return natyw.get(i);
+		} catch (Exception e) {//niepowodzenie
+			return "";
+		}
+	}
+	
+	//uzyskanie s³ówka obcego do testu
 	public String getObcy() {
 		try {
 			return obcy.get(wylosowane.get(index));
+		} catch (Exception e) {//niepowodzenie
+			return "";
+		}
+	}
+	
+	//uzyskanie s³ówka obcego modyfikacji
+	public String getObcy(int i) {
+		try {
+			return obcy.get(i);
 		} catch (Exception e) {//niepowodzenie
 			return "";
 		}
@@ -316,9 +334,25 @@ public class Slowka {
 		
 	}
 	
-	public boolean czySiePowtarzaja(String natywny, String obcojez) {
+	public void modRekord(String natywny, String obcojez, int i) {
+		natyw.set(i, natywny);
+		obcy.set(i, obcojez);
+		nadpisanie();
+		przetworzenie();
+	}
+	
+	public boolean czyRekordPodobny(String natywny, String obcojez) {
 		for(int i=0;i<natyw.size();i++) {
 			if(natywny.equals(natyw.get(i)) || obcojez.equals(obcy.get(i))) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean czyRekordTakiSam(String natywny, String obcojez) {
+		for(int i=0;i<natyw.size();i++) {
+			if(natywny.equals(natyw.get(i)) && obcojez.equals(obcy.get(i))) {
 				return true;
 			}
 		}
